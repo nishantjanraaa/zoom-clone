@@ -11,8 +11,8 @@ function VideoRoom() {
   useEffect(() => {
     const startMeeting = async () => {
       // For testing, use these IDs. For production, get your own at zegocloud.com
-      const appID = 12345678; 
-      const serverSecret = "87654321abcdefg"; 
+      const appID = 2142748525; 
+      const serverSecret = "bc2b89bfa51c049a5e50328860166180"; 
 
       const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(
         appID, 

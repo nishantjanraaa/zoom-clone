@@ -14,14 +14,13 @@ body {
 
 /* THE AUTH PAGE WRAPPER */
 .auth-page {
-  display: flex;
-  justify-content: flex-end; /* Shifts card to the right */
-  align-items: center;
   height: 100vh;
-  width: 100%;
-  padding-right: 8%; /* Spacing for the login card */
-  background: #000;
+  display: flex;
+  background: linear-gradient(135deg, #1a0b2e, #2e1065);
+  color: white;
+  font-family: "Inter", sans-serif;
   position: relative;
+  overflow: hidden;
 }
 
 /* THE MOVING AURA - Smooth dark blue to white transition */
@@ -53,19 +52,20 @@ body {
 
 /* SIDE TEXT (Left Side) */
 .side-text {
-  position: absolute;
-  left: 60px;
-  top: 35%;
-  z-index: 5;
+  flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  justify-content: center;
+  padding-left: 80px;
+  font-size: 34px;
+  font-weight: bold;
+  color: #c4b5fd;
 }
-
 .line {
   display: block;
   font-size: 32px;
   font-weight: bold;
+    overflow: hidden;
   color: white;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -75,8 +75,8 @@ body {
 .word {
   display: inline-block;
   opacity: 0;
-  transform: translateY(15px);
-  animation: wordReveal 0.6s forwards;
+  transform: translateY(20px);
+  animation: fadeUp 0.6s forwards;
 }
 
 @keyframes wordReveal {
@@ -86,16 +86,24 @@ body {
   }
 }
 
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
 /* LOGIN CARD - Size & Shadow from your .card code */
 .auth-card {
-  width: 450px; /* Bigger width */
-  background: rgba(15, 23, 42, 0.95);
-  padding: 55px; /* More internal space */
+  width: 380px;
+  margin: auto;
+  padding: 40px;
   border-radius: 20px;
-  box-shadow: 0 0 40px rgba(37, 99, 235, 0.2);
-  border: 1px solid #1e293b;
-  z-index: 10;
-  transition: 0.3s ease;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
+  text-align: center;
 }
 
 .auth-card:hover {
@@ -105,25 +113,25 @@ body {
 
 .auth-card h2 {
   font-size: 28px;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 .auth-desc {
   font-size: 14px;
   color: #cbd5f5;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
 }
 
 /* INPUTS - Exact same as your Dashboard */
 .auth-card input {
   width: 100%;
-  padding: 15px;
-  margin-bottom: 20px;
-  background: #020617;
-  border: 1px solid #1e293b;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 10px;
+  border: 1px solid #4c1d95;
+  background: #1e1b4b;
   color: white;
-  border-radius: 6px;
-  font-size: 16px;
+  outline: none;
 }
 
 .auth-card input:focus {
@@ -131,29 +139,41 @@ body {
   outline: none;
 }
 
+.auth-card input::placeholder {
+  color: #a5b4fc;
+}
+
+
 /* BUTTON - Exact same as your Dashboard */
 .auth-card button {
   width: 100%;
-  padding: 15px;
-  background: #2563eb;
+  padding: 12px;
+  margin-top: 15px;
   border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #7c3aed, #a78bfa);
   color: white;
-  border-radius: 6px;
   font-weight: bold;
   cursor: pointer;
   transition: 0.3s;
-  font-size: 17px;
 }
 
 .auth-card button:hover {
-  background: #1d4ed8;
-  box-shadow: 0 0 12px #2563eb;
+  transform: scale(1.05);
+  background: linear-gradient(135deg, #6d28d9, #c4b5fd);
 }
 
 .switch-area {
-  margin-top: 25px;
-  font-size: 14px;
   color: #94a3b8;
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.switch-btn {
+  color: #c4b5fd;
+  margin-left: 8px;
+  cursor: pointer;
+  font-weight: bold;
 }
 
 .switch-area span {
@@ -166,12 +186,13 @@ body {
 /* BRAND (Bottom Left) */
 .brand {
   position: absolute;
-  bottom: 40px;
-  left: 60px;
   color: #1e293b;
-  font-size: 14px;
   font-weight: 600;
   z-index: 5;
+  bottom: 20px;
+  right: 40px;
+  font-size: 12px;
+  color: #a5b4fc;
 }
 
 .auth-page {
@@ -233,4 +254,71 @@ body {
 @keyframes moveWhite {
   from { transform: translate(0, 0); }
   to { transform: translate(-150px, -100px); }
+}
+
+/* ================= RESPONSIVE ================= */
+
+/* Tablets */
+@media (max-width: 1024px) {
+  .side-text {
+    font-size: 26px;
+    padding-left: 40px;
+  }
+
+  .auth-card {
+    width: 320px;
+    padding: 30px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .auth-page {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* Hide side text on small screens */
+  .side-text {
+    display: none;
+  }
+
+  .auth-card {
+    width: 90%;
+    max-width: 350px;
+    margin: 0;
+  }
+
+  .brand {
+    position: static;
+    margin-top: 20px;
+    text-align: center;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+  .auth-card {
+    padding: 25px;
+    border-radius: 15px;
+  }
+
+  .auth-card h2 {
+    font-size: 20px;
+  }
+
+  .auth-desc {
+    font-size: 12px;
+  }
+
+  .auth-card input {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .auth-card button {
+    padding: 10px;
+    font-size: 14px;
+  }
 }

@@ -4,54 +4,56 @@ const { Server } = require("socket.io");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const connectDB = require("./config/db");
+const helmet = require("helmet");
 
-// Initialize Config & Database
+// Init
 dotenv.config();
 connectDB();
 
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(helmet());
+
+app.use(cors({
+  origin: "http://localhost:3000",
+  credentials: true
+}));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// API Routes
-app.use("/api/auth", require("./routes/auth"));
+// Routes
+app.use("/api/auth", require("./routes/authRoutes"));
 
 app.get("/", (req, res) => {
   res.send("Backend Server is Running correctly.");
 });
 
-// Create HTTP Server for Socket.io
+// Create server
 const server = http.createServer(app);
 
+// Socket.io
 const io = new Server(server, {
   cors: {
-    origin: ["https://your-live-website.vercel.app", "http://localhost:3000"],
+    origin: "http://localhost:3000",
     methods: ["GET", "POST"],
+    credentials: true
   },
 });
 
 // Socket logic
-io.on("connection", (socket) => {
-  console.log(`⚡ User Connected: ${socket.id}`);
+require("./sockets/socket")(io);
 
-  socket.on("join_room", (roomId) => {
-    socket.join(roomId);
-    console.log(`👤 User joined room: ${roomId}`);
-  });
-
-  socket.on("send_message", (data) => {
-    socket.to(data.room).emit("receive_message", data);
-  });
-
-  socket.on("disconnect", () => {
-    console.log("❌ User Disconnected");
-  });
+// Error handler
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ msg: "Something went wrong" });
 });
 
+// Start server
 const PORT = process.env.PORT || 5000;
+
 server.listen(PORT, () => {
   console.log(`🚀 SERVER RUNNING ON PORT ${PORT}`);
 });

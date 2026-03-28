@@ -16,6 +16,6 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true
   }
-});
+}, { timestamps: true });   // 👈 ADD THIS
 
 module.exports = mongoose.model("User", userSchema);

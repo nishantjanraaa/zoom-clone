@@ -13,11 +13,28 @@ connectDB();
 const app = express();
 
 // Middleware
-app.use(helmet());
+// Helmet configuration: crossOriginResourcePolicy ko false rakha hai taaki images/sockets mein issue na aaye
+app.use(helmet({
+    crossOriginResourcePolicy: false,
+}));
+
+// Yahan humne Localhost aur Vercel dono ko allow kar diya hai
+const allowedOrigins = [
+    "http://localhost:3000",
+    "https://zoom-clone-live.vercel.app"
+];
 
 app.use(cors({
-  origin: "http://localhost:3000",
-  credentials: true
+    origin: function (origin, callback) {
+        // allow requests with no origin (like mobile apps or curl requests)
+        if (!origin) return callback(null, true);
+        if (allowedOrigins.indexOf(origin) === -1) {
+            var msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+            return callback(new Error(msg), false);
+        }
+        return callback(null, true);
+    },
+    credentials: true
 }));
 
 app.use(express.json());
@@ -27,19 +44,19 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api/auth", require("./routes/authRoutes"));
 
 app.get("/", (req, res) => {
-  res.send("Backend Server is Running correctly.");
+    res.send("Backend Server is Running correctly.");
 });
 
 // Create server
 const server = http.createServer(app);
 
-// Socket.io
+// Socket.io Setup
 const io = new Server(server, {
-  cors: {
-    origin: "http://localhost:3000",
-    methods: ["GET", "POST"],
-    credentials: true
-  },
+    cors: {
+        origin: allowedOrigins, // Same allowed origins yahan bhi use ho rhe hain
+        methods: ["GET", "POST"],
+        credentials: true
+    },
 });
 
 // Socket logic
@@ -47,13 +64,13 @@ require("./sockets/socket")(io);
 
 // Error handler
 app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({ msg: "Something went wrong" });
+    console.error(err.stack);
+    res.status(500).json({ msg: "Something went wrong" });
 });
 
 // Start server
 const PORT = process.env.PORT || 5000;
 
 server.listen(PORT, () => {
-  console.log(`🚀 SERVER RUNNING ON PORT ${PORT}`);
+    console.log(`🚀 SERVER RUNNING ON PORT ${PORT}`);
 });

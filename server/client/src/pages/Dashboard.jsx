@@ -33,11 +33,15 @@ function Dashboard() {
 
   return (
     <div className="dash-container">
+      {/* 📱 MOBILE TOP BAR (Only visible on mobile) */}
+      <div className="mobile-top-bar">
+        <div className="mobile-logo">ZoomX</div>
+        <button className="mobile-logout" onClick={logout}>Sign Out</button>
+      </div>
 
-      {/* SIDEBAR */}
+      {/* SIDEBAR (Desktop) */}
       <aside className="sidebar">
         <h2 className="logo">ZoomX</h2>
-
         <nav className="nav-menu">
           <div
             className={`nav-item ${view === "chat" ? "active" : ""}`}
@@ -59,7 +63,6 @@ function Dashboard() {
             <span className="icon">📹</span> Live Meetings
           </div>
         </nav>
-
         <button className="logout-btn" onClick={logout}>
           Sign Out
         </button>
@@ -73,83 +76,62 @@ function Dashboard() {
               ? "Team Collaboration Hub"
               : "Virtual Meeting Space"}
           </h1>
-
           <p>
             {view === "chat"
               ? "Communicate with your team in real-time, securely and efficiently."
-              : ""}
+              : "High-quality video conferencing for your team."}
           </p>
         </header>
 
         <section className="action-grid">
-
-          {/* CREATE */}
-          <div
-            className={`glass-card ${
-              view === "chat" ? "chat-border" : "video-border"
-            }`}
-          >
+          {/* CREATE CARD */}
+          <div className={`glass-card ${view === "chat" ? "chat-border" : "video-border"}`}>
             <div className="card-icon">
               {view === "chat" ? "🚀" : "🎥"}
             </div>
-
-            <h3>
-              {view === "chat"
-                ? "Start New Conversation"
-                : "Start New Meeting"}
-            </h3>
-
+            <h3>{view === "chat" ? "Start New Conversation" : "Start New Meeting"}</h3>
             <p>
               {view === "chat"
                 ? "Create a private chat room and invite your team instantly."
                 : "Launch a secure video session and share the meeting link."}
             </p>
-
             <button className="btn-primary" onClick={handleCreate}>
-              {view === "chat"
-                ? "Create Chat Room"
-                : "Start Meeting"}
+              {view === "chat" ? "Create Chat Room" : "Start Meeting"}
             </button>
           </div>
 
-          {/* JOIN */}
-          <div
-            className={`glass-card ${
-              view === "chat" ? "chat-border" : "video-border"
-            }`}
-          >
+          {/* JOIN CARD */}
+          <div className={`glass-card ${view === "chat" ? "chat-border" : "video-border"}`}>
             <div className="card-icon">🔗</div>
-
-            <h3>
-              {view === "chat"
-                ? "Join Existing Chat"
-                : "Join Meeting"}
-            </h3>
-
+            <h3>{view === "chat" ? "Join Existing Chat" : "Join Meeting"}</h3>
             <p>
               {view === "chat"
                 ? "Enter a room ID or paste a shared link to join the conversation."
                 : "Paste the meeting link or ID to join instantly."}
             </p>
-
             <form onSubmit={handleJoin} className="join-form">
               <input
                 type="text"
-                placeholder={
-                  view === "chat"
-                    ? "Enter chat room ID or link..."
-                    : "Enter meeting ID or link..."
-                }
+                placeholder={view === "chat" ? "Enter chat room ID..." : "Enter meeting ID..."}
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
               />
-
-              <button type="submit" className="btn-glow">
-                Join Now
-              </button>
+              <button type="submit" className="btn-glow">Join Now</button>
             </form>
           </div>
         </section>
+
+        {/* 📲 MOBILE BOTTOM NAV (Only visible on mobile) */}
+        <div className="mobile-bottom-nav">
+          <div className={`nav-item-mobile ${view === 'chat' ? 'active' : ''}`} onClick={() => setView('chat')}>
+            <span style={{fontSize: '20px'}}>💬</span>
+            <span>Chat</span>
+          </div>
+          <div className={`nav-item-mobile ${view === 'video' ? 'active' : ''}`} onClick={() => setView('video')}>
+            <span style={{fontSize: '20px'}}>📹</span>
+            <span>Meetings</span>
+          </div>
+        </div>
       </main>
     </div>
   );

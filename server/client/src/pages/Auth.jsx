@@ -16,10 +16,8 @@ function Auth() {
   const navigate = useNavigate();
 
   const marketingLines = [
-    "Build Better Meetings",
-    "Connect Worldwide",
-    "Collaborate Securely",
-    "Grow Your Network",
+    "Connect with anyone.",
+    "On any device."
   ];
 
   const submit = async (e) => {

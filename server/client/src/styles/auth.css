@@ -1,218 +1,29 @@
-/* RESET - Exact same as your Dashboard */
+/* RESET */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Segoe UI", sans-serif;
+  font-family: "Segoe UI", "Inter", sans-serif;
 }
 
 body {
-  background: #020617;
+  background: #000;
   color: white;
-  overflow: hidden;
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
 /* THE AUTH PAGE WRAPPER */
 .auth-page {
-  height: 100vh;
-  display: flex;
-  background: linear-gradient(135deg, #1a0b2e, #2e1065);
-  color: white;
-  font-family: "Inter", sans-serif;
-  position: relative;
-  overflow: hidden;
-}
-
-/* THE MOVING AURA - Smooth dark blue to white transition */
-.auth-page::before {
-  content: "";
-  position: absolute;
-  top: -20%;
-  left: -10%;
-  width: 80%;
-  height: 80%;
-  border-radius: 50%;
-  /* Default Blue for Login */
-  background: radial-gradient(circle, rgba(37, 99, 235, 0.15) 0%, transparent 70%);
-  filter: blur(100px);
-  animation: auraMovement 20s infinite alternate;
-  transition: background 1s ease;
-  z-index: 1;
-}
-
-.auth-page.register-mode::before {
-  /* White for Register */
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.12) 0%, transparent 70%);
-}
-
-@keyframes auraMovement {
-  0% { transform: translate(0, 0); }
-  100% { transform: translate(20%, 15%); }
-}
-
-/* SIDE TEXT (Left Side) */
-.side-text {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding-left: 80px;
-  font-size: 34px;
-  font-weight: bold;
-  color: #c4b5fd;
-}
-.line {
-  display: block;
-  font-size: 32px;
-  font-weight: bold;
-    overflow: hidden;
-  color: white;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-/* WORD BY WORD ANIMATION */
-.word {
-  display: inline-block;
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeUp 0.6s forwards;
-}
-
-@keyframes wordReveal {
-  to {
-    opacity: 0.5; /* Watermark effect like your dashboard text */
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-
-/* LOGIN CARD - Size & Shadow from your .card code */
-.auth-card {
-  width: 380px;
-  margin: auto;
-  padding: 40px;
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(20px);
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
-  text-align: center;
-}
-
-.auth-card:hover {
-  transform: translateY(-8px); /* Your exact hover animation */
-  box-shadow: 0 0 40px #2563ebaa;
-}
-
-.auth-card h2 {
-  font-size: 28px;
-  margin-bottom: 10px;
-}
-
-.auth-desc {
-  font-size: 14px;
-  color: #cbd5f5;
-  margin-bottom: 20px;
-}
-
-/* INPUTS - Exact same as your Dashboard */
-.auth-card input {
+  min-height: 100vh;
   width: 100%;
-  padding: 12px;
-  margin: 10px 0;
-  border-radius: 10px;
-  border: 1px solid #4c1d95;
-  background: #1e1b4b;
-  color: white;
-  outline: none;
-}
-
-.auth-card input:focus {
-  border-color: #2563eb;
-  outline: none;
-}
-
-.auth-card input::placeholder {
-  color: #a5b4fc;
-}
-
-
-/* BUTTON - Exact same as your Dashboard */
-.auth-card button {
-  width: 100%;
-  padding: 12px;
-  margin-top: 15px;
-  border: none;
-  border-radius: 10px;
-  background: linear-gradient(135deg, #7c3aed, #a78bfa);
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.auth-card button:hover {
-  transform: scale(1.05);
-  background: linear-gradient(135deg, #6d28d9, #c4b5fd);
-}
-
-.switch-area {
-  color: #94a3b8;
-  margin-top: 20px;
-  font-size: 14px;
-}
-
-.switch-btn {
-  color: #c4b5fd;
-  margin-left: 8px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.switch-area span {
-  color: #2563eb;
-  font-weight: bold;
-  cursor: pointer;
-  margin-left: 5px;
-}
-
-/* BRAND (Bottom Left) */
-.brand {
-  position: absolute;
-  color: #1e293b;
-  font-weight: 600;
-  z-index: 5;
-  bottom: 20px;
-  right: 40px;
-  font-size: 12px;
-  color: #a5b4fc;
-}
-
-.auth-page {
   display: flex;
-  justify-content: flex-end; 
+  justify-content: flex-end; /* Laptop mein right side */
   align-items: center;
-  height: 100vh;
-  width: 100%;
-  /* This moves the box further left from the edge */
-  padding-right: 18%; 
+  padding-right: 15%; /* Laptop padding */
   background: #000;
   position: relative;
   overflow: hidden;
-}
-
-/* Update your .auth-page to ensure it handles the background elements */
-.auth-page {
-  position: relative;
-  background: #000;
-  overflow: hidden; /* Keeps the aura from creating scrollbars */
   z-index: 0;
 }
 
@@ -222,12 +33,12 @@ body {
   position: absolute;
   width: 500px;
   height: 500px;
-  background: radial-gradient(circle, rgba(37, 99, 235, 0.4) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.3) 0%, transparent 70%);
   border-radius: 50%;
   filter: blur(80px);
-  z-index: -1; /* Sits behind everything */
+  z-index: -1;
   top: 10%;
-  left: 10%;
+  left: 5%;
   animation: moveBlue 15s infinite alternate ease-in-out;
 }
 
@@ -237,88 +48,196 @@ body {
   position: absolute;
   width: 400px;
   height: 400px;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
   border-radius: 50%;
   filter: blur(80px);
   z-index: -1;
   bottom: 10%;
-  right: 20%;
+  right: 10%;
   animation: moveWhite 20s infinite alternate ease-in-out;
 }
 
 @keyframes moveBlue {
   from { transform: translate(0, 0); }
-  to { transform: translate(100px, 150px); }
+  to { transform: translate(50px, 100px); }
 }
 
 @keyframes moveWhite {
   from { transform: translate(0, 0); }
-  to { transform: translate(-150px, -100px); }
+  to { transform: translate(-50px, -50px); }
 }
 
-/* ================= RESPONSIVE ================= */
+/* SIDE TEXT (Left Side) */
+.side-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 10;
+}
 
-/* Tablets */
-@media (max-width: 1024px) {
+.line {
+  font-size: 42px;
+  font-weight: 800;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  line-height: 1.1;
+  text-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+/* LOGIN CARD */
+.auth-card {
+  width: 380px;
+  padding: 40px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(25px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  z-index: 10;
+}
+
+.auth-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 30px rgba(37, 99, 235, 0.3);
+}
+
+.auth-card h2 {
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+.auth-desc {
+  font-size: 14px;
+  color: #94a3b8;
+  margin-bottom: 24px;
+}
+
+/* INPUTS */
+.auth-card input {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 15px;
+  border-radius: 12px;
+  border: 1px solid #334155;
+  background: rgba(15, 23, 42, 0.8);
+  color: white;
+  font-size: 15px;
+  transition: 0.3s;
+}
+
+.auth-card input:focus {
+  border-color: #3b82f6;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+/* BUTTON */
+.auth-card button {
+  width: 100%;
+  padding: 14px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #6366f1, #a855f7);
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.auth-card button:hover {
+  transform: scale(1.02);
+  filter: brightness(1.1);
+}
+
+.switch-area {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #94a3b8;
+}
+
+.switch-area span {
+  color: #60a5fa;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* BRAND */
+.brand {
+  position: absolute;
+  bottom: 20px;
+  right: 40px;
+  font-size: 12px;
+  color: #475569;
+}
+
+/* ================= RESPONSIVE FIXES ================= */
+
+/* Tablets & Small Laptops */
+@media (min-width: 769px) {
   .side-text {
-    font-size: 26px;
-    padding-left: 40px;
-  }
-
-  .auth-card {
-    width: 320px;
-    padding: 30px;
+    position: absolute;
+    left: 80px;
+    top: 50%;
+    transform: translateY(-50%);
+    max-width: 450px;
+    text-align: left;
   }
 }
 
-/* Mobile */
+/* Mobile View (The big fix) */
 @media (max-width: 768px) {
   .auth-page {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 40px 20px;
+  }
+ .side-text {
+    position: relative;
+    transform: none;
+    left: 0;
+    top: 0;
+    margin-bottom: 30px; /* Card se thodi doori */
+    text-align: center;
+    width: 100%;
   }
 
-  /* Hide side text on small screens */
-  .side-text {
-    display: none;
+  .line {
+    font-size: 28px; /* Mobile pe thoda chota */
   }
-
+  
   .auth-card {
-    width: 90%;
-    max-width: 350px;
-    margin: 0;
+    width: 100%;
+    max-width: 360px;
+    padding: 30px 20px;
+  }
+
+  .auth-page::before {
+    width: 300px;
+    height: 300px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Aura ko center kar diya */
   }
 
   .brand {
-    position: static;
-    margin-top: 20px;
+    right: 0;
+    left: 0;
     text-align: center;
   }
 }
 
-/* Small Mobile */
-@media (max-width: 480px) {
-  .auth-card {
-    padding: 25px;
-    border-radius: 15px;
-  }
-
+/* Very Small Phones */
+@media (max-width: 400px) {
   .auth-card h2 {
-    font-size: 20px;
+    font-size: 22px;
   }
-
-  .auth-desc {
-    font-size: 12px;
-  }
-
-  .auth-card input {
-    padding: 10px;
-    font-size: 14px;
-  }
-
-  .auth-card button {
-    padding: 10px;
-    font-size: 14px;
+  .auth-card input, .auth-card button {
+    padding: 12px;
   }
 }

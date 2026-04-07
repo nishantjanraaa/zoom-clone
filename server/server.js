@@ -21,7 +21,7 @@ app.use(helmet({
 // Yahan humne Localhost aur Vercel dono ko allow kar diya hai
 const allowedOrigins = [
     "http://localhost:3000",
-    "https://zoom-clone-live.vercel.app"
+    "https://zoomnish-27.vercel.app"
 ];
 
 app.use(cors({
